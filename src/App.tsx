@@ -142,7 +142,7 @@ function App() {
   }, []);
 
   const currentSnapshot =
-    currentStepIndex >= 0 ? snapshots[currentStepIndex] : null;
+    currentStepIndex >= 0 ? snapshots[currentStepIndex] ?? null : null;
   const currentLine = currentSnapshot?.line;
 
   return (
