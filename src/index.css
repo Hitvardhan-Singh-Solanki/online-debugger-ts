@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", monospace;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b6479;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #637777;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b6479;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #637777;
+}
+
+/* Monaco Editor line highlight */
+.monaco-editor .current-line-highlight {
+  background-color: rgba(21, 43, 61, 0.5) !important;
+}
+
+/* Smooth transitions */
+button {
+  transition: all 0.2s ease;
+}
+
+input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
