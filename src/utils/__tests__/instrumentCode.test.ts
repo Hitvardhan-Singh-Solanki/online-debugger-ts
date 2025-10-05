@@ -132,7 +132,7 @@ describe("instrumentCode", () => {
 
 describe("generateFunctionCall", () => {
   it("should generate function call with number parameters", () => {
-    const call = generateFunctionCall("add", { a: 5, b: 3 });
+    const call = generateFunctionCall("add", { a: "5", b: "3" });
 
     expect(call).toBe("add(5, 3)");
   });
@@ -143,11 +143,39 @@ describe("generateFunctionCall", () => {
     expect(call).toBe('greet("Alice")');
   });
 
+  it("should generate function call with array parameters", () => {
+    const call = generateFunctionCall("sum", { arr: "[10, 20, 30]" });
+
+    expect(call).toBe("sum([10, 20, 30])");
+  });
+
+  it("should generate function call with object parameters", () => {
+    const call = generateFunctionCall("process", {
+      data: "{name: 'test', age: 25}",
+    });
+
+    expect(call).toBe("process({name: 'test', age: 25})");
+  });
+
+  it("should generate function call with boolean parameters", () => {
+    const call = generateFunctionCall("toggle", { flag: "true" });
+
+    expect(call).toBe("toggle(true)");
+  });
+
+  it("should generate function call with null/undefined parameters", () => {
+    const call1 = generateFunctionCall("test", { val: "null" });
+    const call2 = generateFunctionCall("test", { val: "undefined" });
+
+    expect(call1).toBe("test(null)");
+    expect(call2).toBe("test(undefined)");
+  });
+
   it("should generate function call with mixed parameters", () => {
     const call = generateFunctionCall("process", {
-      id: 42,
+      id: "42",
       name: "test",
-      active: true,
+      active: "true",
     });
 
     expect(call).toBe('process(42, "test", true)');
@@ -157,5 +185,11 @@ describe("generateFunctionCall", () => {
     const call = generateFunctionCall("getValue", {});
 
     expect(call).toBe("getValue()");
+  });
+
+  it("should handle negative numbers", () => {
+    const call = generateFunctionCall("calc", { x: "-5", y: "3.14" });
+
+    expect(call).toBe("calc(-5, 3.14)");
   });
 });

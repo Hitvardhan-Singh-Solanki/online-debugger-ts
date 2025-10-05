@@ -52,7 +52,7 @@ export function ParameterInputs({
               type="text"
               value={values[param] || ""}
               onChange={(e) => onChange(param, e.target.value)}
-              placeholder={`Enter value for ${param}`}
+              placeholder={`e.g., 42, "text", [1,2,3], {key:"val"}, true`}
               className={`w-full px-3 py-2 rounded-md font-mono text-sm transition-colors ${
                 theme === "dark"
                   ? "bg-nightOwl-bg border border-nightOwl-selection text-nightOwl-text placeholder-nightOwl-textDim focus:border-nightOwl-accent focus:ring-1 focus:ring-nightOwl-accent"

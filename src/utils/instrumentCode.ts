@@ -243,6 +243,40 @@ export function generateFunctionCall(
   const args = Object.values(params)
     .map((value) => {
       if (typeof value === "string") {
+        const trimmed = value.trim();
+        
+        // Check if it's a JavaScript literal (array, object, number, boolean, null, undefined)
+        // Arrays: [1,2,3]
+        // Objects: {a:1, b:2}
+        // Numbers: 123, 123.45, -123
+        // Booleans: true, false
+        // Special: null, undefined
+        
+        // Try to detect arrays and objects
+        if (
+          (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+          (trimmed.startsWith('{') && trimmed.endsWith('}'))
+        ) {
+          // Return as-is, it's an array or object literal
+          return trimmed;
+        }
+        
+        // Check for numbers (including negative and decimals)
+        if (/^-?\d+\.?\d*$/.test(trimmed)) {
+          return trimmed;
+        }
+        
+        // Check for booleans
+        if (trimmed === 'true' || trimmed === 'false') {
+          return trimmed;
+        }
+        
+        // Check for null or undefined
+        if (trimmed === 'null' || trimmed === 'undefined') {
+          return trimmed;
+        }
+        
+        // Otherwise, treat as a string
         return `"${value}"`;
       }
       return String(value);
